@@ -283,7 +283,7 @@ wheels = [
 ]
 
 [[package]]
-name = "ddm-clustering-lab"
+name = "ddm-ws2026-lab"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

@@ -1,7 +1,7 @@
 [project]
-name = "ddm-clustering-lab"
+name = "ddm-ws2026-lab"
 version = "0.1.0"
-description = "Data Driven Modelling, Lecture 1: hands-on material for standard clustering algorithms"
+description = "Data Driven Modelling (WS 2026): hands-on lab material for all lectures"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [

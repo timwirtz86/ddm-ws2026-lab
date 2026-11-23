@@ -19,7 +19,8 @@ import pytest
 from nbconvert.preprocessors import ExecutePreprocessor
 
 NOTEBOOK_DIR = Path(__file__).resolve().parents[1] / "notebooks"
-NOTEBOOKS = sorted(NOTEBOOK_DIR.glob("0*.ipynb"))
+# one folder per lecture (lecture01/, lecture02/, ...); solutions/ subfolders are not matched
+NOTEBOOKS = sorted(NOTEBOOK_DIR.glob("lecture*/0*.ipynb"))
 EXPECTED_ERRORS = {"NotImplementedError"}
 
 pytestmark = pytest.mark.skipif(
@@ -34,13 +35,13 @@ def processed_dir(tmp_path_factory) -> Path:
     return tmp_path_factory.mktemp("processed")
 
 
-@pytest.mark.parametrize("path", NOTEBOOKS, ids=[p.name for p in NOTEBOOKS])
+@pytest.mark.parametrize("path", NOTEBOOKS, ids=[f"{p.parent.name}/{p.name}" for p in NOTEBOOKS])
 def test_notebook_runs(path: Path, processed_dir: Path, monkeypatch) -> None:
     monkeypatch.setenv("DDM_PROCESSED_DIR", str(processed_dir))
     monkeypatch.setenv("MPLBACKEND", "Agg")
     nb = nbformat.read(path, as_version=4)
     ExecutePreprocessor(timeout=600, allow_errors=True).preprocess(
-        nb, {"metadata": {"path": str(NOTEBOOK_DIR)}}
+        nb, {"metadata": {"path": str(path.parent)}}
     )
     errors = [
         out.get("ename")

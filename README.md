@@ -1,14 +1,20 @@
-# DDM Clustering Lab (WS 2026)
+# DDM Lab (WS 2026)
 
-[![Install check (macOS, Windows, Linux)](https://github.com/timwirtz86/ddm-ws2026-clustering-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/timwirtz86/ddm-ws2026-clustering-lab/actions/workflows/ci.yml)
+[![Install check (macOS, Windows, Linux)](https://github.com/timwirtz86/ddm-ws2026-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/timwirtz86/ddm-ws2026-lab/actions/workflows/ci.yml)
 
-Hands-on material for *Data Driven Modelling*, Lecture 1: **standard clustering algorithms**
-(TH Köln, winter term 2026).
+Hands-on material for *Data Driven Modelling* (TH Köln, winter term 2026). One repository for
+the whole course: every lecture adds a folder `notebooks/lectureNN/`; the data, the helper
+library and the installation stay the same.
 
-In this lab we cluster a real dataset step by step and write the important parts ourselves:
-preprocessing, distance measures (including the Gower distance for mixed attribute types),
-agglomerative clustering and k-medoids. Then we evaluate the results and try DBSCAN. At the
-start of the next lecture we explain the clusters with a small decision tree.
+| Lecture | Topic | Notebooks |
+|---------|-------|-----------|
+| 1 | Standard clustering algorithms: dataset, attributes, distances | `notebooks/lecture01/` (01–02) |
+| 2 | Clustering continued: algorithms, evaluation, DBSCAN, explaining clusters, homework; then topic modelling | `notebooks/lecture02/` (03–05) |
+
+In the clustering labs we cluster a real dataset step by step and write the important parts
+ourselves: preprocessing, distance measures (including the Gower distance for mixed attribute
+types), agglomerative clustering and k-medoids. Then we evaluate the results, try DBSCAN and
+explain the clusters with a small decision tree.
 
 Everything that is *plumbing* (loading the data, saving intermediate results, plotting) is done
 by the small helper library `ddm` in `src/ddm/`. Everything that is a *learning goal* is a TODO
@@ -82,8 +88,8 @@ Is git installed? `git --version` prints a version number. If not:
 Then go to the folder where you want the lab (e.g. your home folder) and download it:
 
 ```bash
-git clone https://github.com/timwirtz86/ddm-ws2026-clustering-lab.git
-cd ddm-ws2026-clustering-lab
+git clone https://github.com/timwirtz86/ddm-ws2026-lab.git
+cd ddm-ws2026-lab
 ```
 
 **Option B, without git**
@@ -120,8 +126,8 @@ The last line should say something like `20 passed`. If yes, everything is ready
 uv run jupyter lab
 ```
 
-JupyterLab opens in your browser. The notebooks are in the folder `notebooks/`; start with
-`01_dataset.ipynb`. To stop JupyterLab, go back to the terminal and press `Ctrl` + `C` (twice).
+JupyterLab opens in your browser. The notebooks are in the folder `notebooks/`, one subfolder
+per lecture; start with `lecture01/01_dataset.ipynb`. To stop JupyterLab, go back to the terminal and press `Ctrl` + `C` (twice).
 
 **Every later session:** open a terminal, `cd` into the lab folder, `uv run jupyter lab`.
 
@@ -150,7 +156,7 @@ Run `uv sync` once before, so that `.venv` exists.
 
 ## Getting updates
 
-We may fix or add things during the semester. With git:
+Every lecture adds notebooks, and we may fix things during the semester. With git:
 
 ```bash
 git pull
@@ -158,8 +164,22 @@ git pull
 
 Our recommendation, so that `git pull` never conflicts with your own work: before you start
 working on a notebook, make a copy of it (e.g. `02_distance_myname.ipynb`) and work in the copy.
-If `git pull` complains about local changes anyway, `git stash`, then `git pull`, then
-`git stash pop` brings your changes back.
+If `git pull` complains about local changes anyway, run these three commands; your changes come
+back, also in notebooks that moved to another folder:
+
+```bash
+git stash
+git pull
+git stash pop
+```
+
+> **Update after Lecture 1 (23.11.2026):** the notebooks moved into one folder per lecture
+> (`notebooks/lecture01/`, `notebooks/lecture02/`) and the repository was renamed from
+> `ddm-ws2026-clustering-lab` to `ddm-ws2026-lab`. If you worked in `01_dataset.ipynb` or
+> `02_distance.ipynb` directly, a plain `git pull` stops with *"Your local changes … would be
+> overwritten"*: use the three commands above. Your old clone keeps working; GitHub forwards
+> the old address. Copies you made yourself (e.g. `02_distance_myname.ipynb`) stay where they
+> are: move them into `notebooks/lecture01/` by hand.
 
 ---
 
@@ -169,13 +189,13 @@ Run them in order. Each notebook saves its results to `data/processed/`; the nex
 loads them. If a file is missing there (because a task is not solved yet), the next notebook
 prints a `NOTICE` and continues with a simple baseline, so we never get stuck.
 
-| Notebook | Block | Time | What we do |
-|----------|-------|------|------------|
-| `01_dataset.ipynb` | B1 | 10 min | choose a dataset, write our question, classify every attribute |
-| `02_distance.ipynb` | B4 | 25 min | `preprocess`, Minkowski and cosine distance, **Gower distance** |
-| `03_clustering.ipynb` | B6 | 25 min | **agglomerative clustering**, **k-medoids** (optional: k-means with our distance) |
-| `04_beyond.ipynb` | B7–B8 | 20 min | silhouette, ARI, elbow; DBSCAN. Part 3 (cluster profiles and a surrogate tree) is for next week, start of Lecture 2 |
-| `05_homework.ipynb` | B10 | homework | apply **DBSCAN** to our dataset and test it against the other methods, incl. "structure or artefact?" |
+| Lecture | Notebook | Block | Time | What we do |
+|---------|----------|-------|------|------------|
+| 1 | `lecture01/01_dataset.ipynb` | B1 | 10 min | choose a dataset, write our question, classify every attribute |
+| 1 | `lecture01/02_distance.ipynb` | B4 | 25 min | `preprocess`, Minkowski and cosine distance, **Gower distance** |
+| 2 | `lecture02/03_clustering.ipynb` | B6 | 25 min | **agglomerative clustering**, **k-medoids** (optional: k-means with our distance) |
+| 2 | `lecture02/04_beyond.ipynb` | B7–B9 | 30 min | silhouette, ARI, elbow; DBSCAN; cluster profiles and a surrogate tree |
+| 2 | `lecture02/05_homework.ipynb` | B10 | homework | apply **DBSCAN** to our dataset and test it against the other methods, incl. "structure or artefact?" |
 
 Every TODO function has a check cell below it that prints one line per test:
 `PASS`, `FAIL` (with the reason), `TODO` (not implemented yet) or `ERROR` (with the traceback).
@@ -219,14 +239,14 @@ the lab). Ask us if unsure.
 ## Folder structure
 
 ```
-ddm-ws2026-clustering-lab/
+ddm-ws2026-lab/
 ├── README.md           this file
 ├── LICENSE             MIT licence for the code and notebooks
 ├── pyproject.toml      dependencies (uv); uv.lock pins the exact versions
 ├── data/raw/           the four datasets as published (+ DATA_SOURCES.md)
 ├── data/processed/     intermediate results of the notebooks (created automatically, not in git)
 ├── src/ddm/            helper library: datasets, plots, checks, saving/loading (plumbing only)
-├── notebooks/          01–05
+├── notebooks/          one folder per lecture: lecture01/ (01–02), lecture02/ (03–05), ...
 ├── figures/            for figures we want to keep
 └── tests/              installation check: uv run pytest
 ```

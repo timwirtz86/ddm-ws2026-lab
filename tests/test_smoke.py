@@ -137,7 +137,8 @@ def test_check_helper(capsys):
     assert "IndexError" in out.err
 
 
-@pytest.mark.parametrize("name", ["01_dataset", "02_distance", "03_clustering", "04_beyond", "05_homework"])
+@pytest.mark.parametrize("name", ["lecture01/01_dataset", "lecture01/02_distance",
+                                  "lecture02/03_clustering", "lecture02/04_beyond", "lecture02/05_homework"])
 def test_notebooks_are_valid_and_clean(name):
     nb = nbformat.read(NOTEBOOK_DIR / f"{name}.ipynb", as_version=4)
     nbformat.validate(nb)

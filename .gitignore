@@ -11,5 +11,5 @@ figures/*.png
 data/processed/
 
 # instructor solutions, copied here by instructor/run_solutions.sh: never commit
-notebooks/solutions/
+notebooks/**/solutions/
 *_solution.ipynb
