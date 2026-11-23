@@ -175,7 +175,7 @@ prints a `NOTICE` and continues with a simple baseline, so we never get stuck.
 | `02_distance.ipynb` | B4 | 25 min | `preprocess`, Minkowski and cosine distance, **Gower distance** |
 | `03_clustering.ipynb` | B6 | 25 min | **agglomerative clustering**, **k-medoids** (optional: k-means with our distance) |
 | `04_beyond.ipynb` | B7–B8 | 20 min | silhouette, ARI, elbow; DBSCAN. Part 3 (cluster profiles and a surrogate tree) is for next week, start of Lecture 2 |
-| `05_homework.ipynb` | B10 | homework | full analysis of our dataset, incl. "structure or artefact?" |
+| `05_homework.ipynb` | B10 | homework | apply **DBSCAN** to our dataset and test it against the other methods, incl. "structure or artefact?" |
 
 Every TODO function has a check cell below it that prints one line per test:
 `PASS`, `FAIL` (with the reason), `TODO` (not implemented yet) or `ERROR` (with the traceback).
